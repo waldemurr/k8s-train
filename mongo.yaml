@@ -21,19 +21,19 @@ spec:
         - containerPort: 27017
         env:
         - name: MONGODB_INITDB_ROOT_USERNAME
-          valueRef: 
+          valueFrom: 
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-username
         - name: MONGODB_INITDB_ROOT_PASSWORD
-          valueRef: 
+          valueFrom: 
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
         resources:
-      limits:
-        memory: 512Mi
-        cpu: "1"
-      requests:
-        memory: 256Mi
-        cpu: "0.2"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

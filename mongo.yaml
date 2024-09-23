@@ -14,9 +14,10 @@ spec:
       labels:
         app: mongodb
     spec:
+      # imagePullPolicy: IfNotPresent
       containers:
       - name: mongodb
-        image: mongodb
+        image: mongo
         ports:
         - containerPort: 27017
         env:
@@ -37,3 +38,15 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
